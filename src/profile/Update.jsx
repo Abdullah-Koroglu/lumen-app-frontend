@@ -16,8 +16,8 @@ function Update({ history }) {
     };
 
     const validationSchema = Yup.object().shape({
-        title: Yup.string()
-            .required('Title is required'),
+        // color: Yup.string()
+        //     .required('Title is required'),
         firstName: Yup.string()
             .required('First Name is required'),
         lastName: Yup.string()

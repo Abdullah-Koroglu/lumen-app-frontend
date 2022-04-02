@@ -1,5 +1,6 @@
 import config from 'config';
 import { accountService } from '@/_services';
+import fetch from 'cross-fetch';
 
 export const fetchWrapper = {
     get,
@@ -8,22 +9,38 @@ export const fetchWrapper = {
     delete: _delete
 }
 
-function get(url) {
+function get(url, withCredentials) {
+    let credentials = {}
+    if (withCredentials) {
+        let token = getRefreshToken();
+        credentials = {
+            'Authorization': `Bearer ${token}`
+        }
+    }
     const requestOptions = {
         method: 'GET',
-        headers: authHeader(url)
+        headers: {...authHeader(url), ...credentials},
+        credentials: 'same-origin',
     };
     return fetch(url, requestOptions).then(handleResponse);
 }
 
-function post(url, body) {
-    var myHeaders = new Headers();
-myHeaders.append("Cookie", "XDEBUG_SESSION=XDEBUG_ECLIPSE", authHeader(url));
+function post(url, body, withCredentials) {
+    let credentials = {}
+    if (withCredentials) {
+        let token = getRefreshToken();
+        credentials = {
+            'Authorization': `Bearer ${token}`
+        }
+    }
 
-    const requestOptions = {
+const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...authHeader(url) },
-        // credentials: 'include',
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           ...credentials
+        },
         body: JSON.stringify(body)
     };
     return fetch(url, requestOptions).then(handleResponse);
@@ -77,4 +94,9 @@ function handleResponse(response) {
 
         return data;
     });
+}
+
+function getRefreshToken() {
+    // get refresh token from cookie
+    return (document.cookie.split(';').find(x => x.includes('refreshToken')) || '=').split('=')[1];
 }

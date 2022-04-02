@@ -5,6 +5,9 @@ import { fetchWrapper, history } from '@/_helpers';
 
 const userSubject = new BehaviorSubject(null);
 const baseUrl = `${config.apiUrl}/accounts`;
+const newBaseUrl = `http://localhost:8000`;
+import axios from 'axios';
+
 
 export const accountService = {
     login,
@@ -24,27 +27,31 @@ export const accountService = {
 };
 
 function login(email, password) {
-    return  fetchWrapper.post("http://localhost:8000/api/login", { email, password })
-    // return fetchWrapper.post(`${baseUrl}/authenticate`, { email, password })
+return  fetchWrapper.post(`${newBaseUrl}/api/login`, { email, password })
         .then(user => {
-            
+            setRefreshToken(user.jwtToken, user.expires_in)
             // publish user to subscribers and start timer to refresh token
             userSubject.next(user);
             startRefreshTokenTimer();
             return user;
         });
+
+
 }
 
 function logout() {
     // revoke token, stop refresh timer, publish null to user subscribers and redirect to login page
-fetchWrapper.post("http://localhost:8000/api/logout", { })
-    stopRefreshTokenTimer();
-    userSubject.next(null);
-    history.push('/account/login');
+    fetchWrapper.post(`${newBaseUrl}/api/logout`, {}, true)
+        document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        stopRefreshTokenTimer();
+        userSubject.next(null);
+        history.push('/account/login');
 }
 
 function refreshToken() {
-    return fetchWrapper.post(`${baseUrl}/refresh-token`, {})
+    let refreshToken = getRefreshToken()
+    console.log(refreshToken);
+    return fetchWrapper.post(`${newBaseUrl}/api/refresh-token`, {token: refreshToken})
         .then(user => {
             // publish user to subscribers and start timer to refresh token
             userSubject.next(user);
@@ -54,7 +61,10 @@ function refreshToken() {
 }
 
 function register(params) {
-    return fetchWrapper.post(`${baseUrl}/register`, params);
+    return fetchWrapper.post(`${newBaseUrl}/api/register`, params).then((user)=>{
+        userSubject.next(user);
+        startRefreshTokenTimer();
+    });
 }
 
 function verifyEmail(token) {
@@ -70,7 +80,7 @@ function resetPassword({ token, password, confirmPassword }) {
 }
 
 function getAll() {
-    return fetchWrapper.get(baseUrl);
+    return fetchWrapper.get(`${newBaseUrl}/api/accounts`, true);
 }
 
 function getById(id) {
@@ -81,8 +91,8 @@ function create(params) {
     return fetchWrapper.post(baseUrl, params);
 }
 
-function update(id, params) {
-    return fetchWrapper.put(`${baseUrl}/${id}`, params)
+function update(id) {
+    return fetchWrapper.put(`${newBaseUrl}/api/update-user`, params, true)
         .then(user => {
             // update stored user if the logged in user updated their own record
             if (user.id === userSubject.value.id) {
@@ -122,4 +132,18 @@ function startRefreshTokenTimer() {
 
 function stopRefreshTokenTimer() {
     clearTimeout(refreshTokenTimeout);
+}
+
+
+function setRefreshToken(token, expires_in) {
+    // add token cookie that expires in 7 days
+    const expires = new Date(Date.now() + expires_in*1000).toUTCString();
+    document.cookie = `refreshToken=${token}; expires=${expires}; path=/`;
+
+    return token;
+}
+
+function getRefreshToken() {
+    // get refresh token from cookie
+    return (document.cookie.split(';').find(x => x.includes('refreshToken')) || '=').split('=')[1];
 }
