@@ -118,7 +118,6 @@ function Update({ history }) {
                         <div className="form-group col">
                             <label>Theme</label>
                             <Field name="color" as="select" className={'form-control' + (errors.color && touched.color ? ' is-invalid' : '')}>
-                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

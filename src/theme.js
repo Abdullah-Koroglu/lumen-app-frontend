@@ -15,21 +15,26 @@ export const darkTheme = {
 export const GlobalStyles = createGlobalStyle`
 	body {
 		background-color: ${(props) => props.theme.body} !important; 
+        color: ${(props) => props.theme.fontColor};
 	}
 
     p-4 {
 		background-color: ${(props) => props.theme.body} !important;
+        color: ${(props) => props.theme.fontColor};
     }
 
     .app-container {
 		background-color: ${(props) => props.theme.body} !important;
+        color: ${(props) => props.theme.fontColor};
     }
 
     .card-body {
         background: ${(props) => props.theme.secondaryBody} !important;
+        color: ${(props) => props.theme.fontColor};
     }
     .card{
         background: ${(props) => props.theme.secondaryBody} !important;
+        color: ${(props) => props.theme.fontColor};
         border-color: ${(props) => props.theme.thirdBody};
     }
     .card-header{
@@ -37,11 +42,17 @@ export const GlobalStyles = createGlobalStyle`
     }
     .navbar-extend{
         background: ${(props) => props.theme.secondaryBody} !important;
+        color: ${(props) => props.theme.fontColor};
         border-color: ${(props) => props.theme.secondaryBody} !important;
     }
 
     .bg-dark{
         background: ${(props) => props.theme.secondaryBody} !important;
+        color: ${(props) => props.theme.fontColor};
         border-color: ${(props) => props.theme.secondaryBody} !important;
+    }
+
+    table{
+        color: ${(props) => props.theme.fontColor} !important;
     }
 `;
