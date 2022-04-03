@@ -6,6 +6,7 @@ import { accountService } from '@/_services';
 
 function Nav() {
     const [user, setUser] = useState({});
+    const [popupVisible, setPopup] = useState(false);
 
     useEffect(() => {
         const subscription = accountService.user.subscribe(x => setUser(x));
@@ -14,6 +15,28 @@ function Nav() {
 
     // only show nav when logged in
     // if (!user) return null;
+
+    const popup = () =>{
+        return (
+            <>
+                <div className='popup-back'>
+                </div>
+                <div className='popup-container'>
+                    <p className='popup-text'>Do you want to logout safely?</p>
+                    <div className='row popup-row'>
+                        <button onClick={(e)=>{
+                            setPopup(false)
+                            accountService.logout(e)
+                            }} className="btn btn-primary mr-2">
+                            Logout
+                        </button>
+                        <button onClick={()=>{setPopup(false)}} className="btn btn-primary mr-2">
+                            Cancel
+                        </button>
+                    </div>
+                </div></>
+        )
+    }
 
     return (
         <div>
@@ -25,8 +48,9 @@ function Nav() {
                         <NavLink to="/admin" className="nav-item nav-link">Admin</NavLink>
                     }
                     {user ? 
-                    <a onClick={accountService.logout} className="nav-item nav-link">Logout</a> : 
+                    <a onClick={()=>{setPopup(true)}} className="nav-item nav-link">Logout</a> : 
                     <NavLink to="/account/login" className="nav-item nav-link">Login</NavLink>}
+                    {popupVisible && popup()}
                 </div>
             </nav>
             {/* <Route path="/admin" component={AdminNav} /> */}

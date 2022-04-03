@@ -103,6 +103,10 @@ export const GlobalStyles = createGlobalStyle`
       border-color: ${(props) => props.theme.secondaryBody} !important;
   }
 
+  .popup-text{
+    color: ${(props) => props.theme.secondaryBody};
+  }
+
   a{
     color: ${(props) => props.theme.lightText};
   }
@@ -111,4 +115,4 @@ export const GlobalStyles = createGlobalStyle`
   }
 
 
-`;
+`;  

@@ -59,9 +59,37 @@ a { cursor: pointer; }
     border-width: 2px;
 }
 
-// .drop-item-color{
-//     background-color: #13c1c1;
-// }
+.popup-container{
+    padding: 15px;
+    opacity: 1;
+    z-index: 10;
+    width: 300px;
+    position: absolute;
+    left: calc(50% - 200px);
+    top: 150px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50;
+}
+
+.popup-row{
+    gap: 15px;
+}
+
+.popup-back{
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: black;
+    opacity: 70%;
+}
 
 .users-list-item:last-child .lastItem{
     border-bottom-right-radius: 10px;
