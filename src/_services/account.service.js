@@ -5,7 +5,8 @@ import { fetchWrapper, history } from '@/_helpers';
 
 const userSubject = new BehaviorSubject(null);
 const baseUrl = `${config.apiUrl}/accounts`;
-const newBaseUrl = `http://localhost:8000`;
+// const newBaseUrl = `http://localhost:8000`;
+const newBaseUrl = `https://lumen-test-ins.herokuapp.com`;
 
 
 export const accountService = {
