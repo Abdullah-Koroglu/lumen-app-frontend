@@ -9,7 +9,7 @@ import { Profile } from '@/profile';
 import { Admin } from '@/admin';
 import { Account } from '@/account';
 import styled, { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, GlobalStyles } from "../theme";
+import { lightTheme, darkTheme, GlobalStyles, darkRed, lightBlue } from "../theme";
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
     }, [accountService.userValue?.color])
 
     return (
-        <ThemeProvider theme={color == '1' ? lightTheme : darkTheme}>
+        <ThemeProvider theme={color == '1' ? lightTheme : color == '2' ? darkTheme : color == '3' ? darkRed : lightBlue }>
             <GlobalStyles />
             {/* <StyledApp> */}
                 <div className={'app-container'}>

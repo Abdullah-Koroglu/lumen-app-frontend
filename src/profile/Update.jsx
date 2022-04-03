@@ -118,10 +118,10 @@ function Update({ history }) {
                         <div className="form-group col">
                             <label>Theme</label>
                             <Field name="color" as="select" className={'form-control' + (errors.color && touched.color ? ' is-invalid' : '')}>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                                <option value="1">Light</option>
+                                <option value="2">Dark Green</option>
+                                <option value="3">Dark Red</option>
+                                <option value="4">Light Blue</option>
                             </Field>
                             <ErrorMessage name="color" component="div" className="invalid-feedback" />
                         </div>
@@ -141,47 +141,6 @@ function Update({ history }) {
                         <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
                         <ErrorMessage name="email" component="div" className="invalid-feedback" />
                     </div>
-                    {/* <DragDropContext
-                        //  onDragEnd={(e) => { setMyRole(e.draggableId); }}
-                         >
-                            <div className='drag-from'>
-                                <Droppable isDragDisabled droppableId="some_id">
-                                    {provided => (
-                                        <>
-                                            <div ref={provided.innerRef} {...provided.droppableProps}>
-                                                {roles.filter(i=> i != myRole).map((item,index) =>
-                                                    <Draggable onDragEnd={(e) => {
-                                                        console.log(e);
-                                                    }} draggableId={item} index={index}>
-                                                        {(provided, snapshot) => (
-                                                            <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                                                {item}
-                                                            </div>
-                                                        )}
-                                                    </Draggable>)}
-                                            </div>
-                                            {provided.placeholder}
-                                        </>
-                                    )}
-                                </Droppable>
-                            </div>
-                            <Droppable droppableId="some_id">
-                                    {provided => (
-                                        <>
-                                            <div ref={provided.innerRef} {...provided.droppableProps}>
-                                                <Draggable isDragDisabled draggableId={'target'} index={-1}>
-                                                    {(provided, snapshot) => (
-                                                        <div  className='role-target' {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                                            {myRole}
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            </div>
-                                            {provided.placeholder}
-                                        </>
-                                    )}
-                                </Droppable>
-                        </DragDropContext> */}
                     <div className='drag-container'>
                         <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
                             {Object.entries(columns).map(([columnId, column], index) => {
@@ -212,7 +171,7 @@ function Update({ history }) {
                                                             {column.items.map((item, index) => {
                                                                 return (
                                                                     <Draggable
-                                                                    isDragDisabled={columnId === 1 ? true : false }
+                                                                        isDragDisabled={columnId === 1 ? true : false }
                                                                         key={item.id}
                                                                         draggableId={item.id}
                                                                         index={index}

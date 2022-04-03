@@ -12,6 +12,20 @@ export const darkTheme = {
   fontColor: "#fff",
 };
 
+export const darkRed = {
+  body: "#28010a",
+  secondaryBody: "#3a020f",
+  thirdBody: "#000",
+  fontColor: "#fff",
+};
+
+export const lightBlue = {
+  body: "#e4f4ff",
+  secondaryBody: "#91c6ff",
+  thirdBody: "#fff",
+  fontColor: "#565656",
+};
+
 export const GlobalStyles = createGlobalStyle`
 	body {
 		background-color: ${(props) => props.theme.body} !important; 
