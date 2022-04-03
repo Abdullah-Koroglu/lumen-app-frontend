@@ -6,7 +6,6 @@ import { fetchWrapper, history } from '@/_helpers';
 const userSubject = new BehaviorSubject(null);
 const baseUrl = `${config.apiUrl}/accounts`;
 const newBaseUrl = `http://localhost:8000`;
-import axios from 'axios';
 
 
 export const accountService = {
@@ -50,7 +49,6 @@ function logout() {
 
 function refreshToken() {
     let refreshToken = getRefreshToken()
-    console.log(refreshToken);
     return fetchWrapper.post(`${newBaseUrl}/api/refresh-token`, {token: refreshToken})
         .then(user => {
             // publish user to subscribers and start timer to refresh token
@@ -91,8 +89,8 @@ function create(params) {
     return fetchWrapper.post(baseUrl, params);
 }
 
-function update(id) {
-    return fetchWrapper.put(`${newBaseUrl}/api/update-user`, params, true)
+function update(params) {
+    return fetchWrapper.post(`${newBaseUrl}/api/update-user`, params, true)
         .then(user => {
             // update stored user if the logged in user updated their own record
             if (user.id === userSubject.value.id) {

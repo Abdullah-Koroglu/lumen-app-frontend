@@ -81,7 +81,7 @@ function AddEdit({ history, match }) {
                     if (!isAddMode) {
                         // get user and set form fields
                         accountService.getById(id).then(user => {
-                            const fields = ['title', 'firstName', 'lastName', 'email', 'role'];
+                            const fields = ['color', 'firstName', 'lastName', 'email', 'role'];
                             fields.forEach(field => setFieldValue(field, user[field], false));
                         });
                     }

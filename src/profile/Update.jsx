@@ -8,6 +8,7 @@ import { accountService, alertService } from '@/_services';
 function Update({ history }) {
     const user = accountService.userValue;
     const initialValues = {
+        color: user.color,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
@@ -36,7 +37,7 @@ function Update({ history }) {
 
     function onSubmit(fields, { setStatus, setSubmitting }) {
         setStatus();
-        accountService.update(user.id, fields)
+        accountService.update(fields)
             .then(() => {
                 alertService.success('Update successful', { keepAfterRouteChange: true });
                 history.push('.');
@@ -63,15 +64,15 @@ function Update({ history }) {
                     <h1>Update Profile</h1>
                     <div className="form-row">
                         <div className="form-group col">
-                            <label>Title</label>
-                            <Field name="title" as="select" className={'form-control' + (errors.title && touched.title ? ' is-invalid' : '')}>
-                                <option value=""></option>
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="Miss">Miss</option>
-                                <option value="Ms">Ms</option>
+                            <label>Theme</label>
+                            <Field name="color" as="select" className={'form-control' + (errors.color && touched.color ? ' is-invalid' : '')}>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                             </Field>
-                            <ErrorMessage name="title" component="div" className="invalid-feedback" />
+                            <ErrorMessage name="color" component="div" className="invalid-feedback" />
                         </div>
                         <div className="form-group col-5">
                             <label>First Name</label>
