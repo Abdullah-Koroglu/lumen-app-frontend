@@ -8,14 +8,14 @@ import { Home } from '@/home';
 import { Profile } from '@/profile';
 import { Admin } from '@/admin';
 import { Account } from '@/account';
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles, darkRed, lightBlue } from "../theme";
 
 
 function App() {
     const { pathname } = useLocation();  
     const [user, setUser] = useState({});
-    const [color, setColor] = useState(2);
+    const [color, setColor] = useState(1);
 
     useEffect(() => {
         const subscription = accountService.user.subscribe(x => setUser(x));
@@ -23,7 +23,7 @@ function App() {
     }, []);
 
     useEffect(()=>{
-        setColor(accountService.userValue?.color)
+        accountService.userValue?.color && setColor(accountService.userValue?.color)
     }, [accountService.userValue?.color])
 
     return (

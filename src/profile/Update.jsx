@@ -118,7 +118,7 @@ function Update({ history }) {
                         <div className="form-group col">
                             <label>Theme</label>
                             <Field name="color" as="select" className={'form-control' + (errors.color && touched.color ? ' is-invalid' : '')}>
-                                <option value="1">Light</option>
+                                <option value="1">Light Purple</option>
                                 <option value="2">Dark Green</option>
                                 <option value="3">Dark Red</option>
                                 <option value="4">Light Blue</option>
@@ -164,7 +164,7 @@ function Update({ history }) {
                                                             style={{
                                                                 background: snapshot.isDraggingOver
                                                                     ? "lightblue"
-                                                                    : "lightgrey",
+                                                                    : "#efefef",
                                                                 padding: 4,
                                                             }}
                                                         >
@@ -182,13 +182,13 @@ function Update({ history }) {
                                                                                     ref={provided.innerRef}
                                                                                     {...provided.draggableProps}
                                                                                     {...provided.dragHandleProps}
-                                                                                    className="drop-item"
+                                                                                    className="drop-item drop-item-color"
                                                                                     style={{
                                                                                         userSelect: "none",
-                                                                                        backgroundColor: snapshot.isDragging
-                                                                                            ? "#343a40"
-                                                                                            : "#307bff",
-                                                                                        color: "white",
+                                                                                        // backgroundColor: snapshot.isDragging
+                                                                                        //     ? "#343a40"
+                                                                                        //     : "#307bff",
+                                                                                        // color: "white",
                                                                                         ...provided.draggableProps.style
                                                                                     }}
                                                                                 >
