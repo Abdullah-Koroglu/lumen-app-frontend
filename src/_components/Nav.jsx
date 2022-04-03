@@ -29,7 +29,7 @@ function Nav() {
                     <NavLink to="/account/login" className="nav-item nav-link">Login</NavLink>}
                 </div>
             </nav>
-            <Route path="/admin" component={AdminNav} />
+            {/* <Route path="/admin" component={AdminNav} /> */}
         </div>
     );
 }

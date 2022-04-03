@@ -39,12 +39,13 @@ function List({ match }) {
                 <tbody>
                     {users && users.map(user =>
                         <tr 
-                            style={currentUser.id == user.id ? { backgroundColor: 'red'} : null}
+                            className={`${currentUser.id == user.id ? 'users-list-item' : ''}`}
+                            // style={currentUser.id == user.id ? { backgroundColor: 'red'} : null}
                         key={user.id}>
-                            <td>{user.firstName} {user.lastName}</td>
+                            <td className='firstItem'>{user.firstName} {user.lastName}</td>
                             <td>{user.email}</td>
                             <td>{user.role}</td>
-                            <td>
+                            <td className='lastItem'>
                                 {/* <Link to={`${path}/edit/${user.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
                                 <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger" style={{ width: '60px' }} disabled={user.isDeleting}>
                                     {user.isDeleting 
