@@ -141,6 +141,8 @@ function Update({ history }) {
                         <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
                         <ErrorMessage name="email" component="div" className="invalid-feedback" />
                     </div>
+                    Please drop the role you want to My Role to gain this role.
+                    <p></p> 
                     <div className='drag-container'>
                         <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
                             {Object.entries(columns).map(([columnId, column], index) => {

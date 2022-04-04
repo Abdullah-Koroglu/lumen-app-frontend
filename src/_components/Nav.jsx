@@ -22,7 +22,7 @@ function Nav() {
                 <div className='popup-back'>
                 </div>
                 <div className='popup-container'>
-                    <p className='popup-text'>Do you want to logout safely?</p>
+                    <h5 className='popup-text'>Do you want to logout safely?</h5>
                     <div className='row popup-row'>
                         <button onClick={(e)=>{
                             setPopup(false)
